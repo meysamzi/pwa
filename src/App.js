@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,12 +17,16 @@ export default function App() {
     setPage(newPage);
   };
 
-  console.log(process.env.REACT_APP_API_KEY);
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_KEY}products`)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
 
   return (
     <Paper sx={{ maxWidth: "1280px", margin: "40px auto", overflow: "hidden" }}>
