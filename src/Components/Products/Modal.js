@@ -1,4 +1,14 @@
-const Modal = () => {
+import { TextField, Button } from "@mui/material";
+import { Close } from "@mui/icons-material";
+import { inputNames } from "../../Assets/mockData";
+
+const Modal = ({
+  isModalOpen,
+  setIsModalOpen,
+  editRecord,
+  setEditRecord,
+  updateRecord,
+}) => {
   return (
     <div style={{ display: isModalOpen ? "flex" : "none" }} className="modal">
       <Close sx={{ cursor: "pointer" }} onClick={() => setIsModalOpen(false)} />

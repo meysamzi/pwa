@@ -7,11 +7,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
-  Button,
 } from "@mui/material";
-import { Close } from "@mui/icons-material";
-import { columns, inputNames } from "./Assets/mockData";
+import { columns } from "./Assets/mockData";
 import Modal from "./Components/Products/Modal";
 
 export default function App() {
@@ -99,7 +96,13 @@ export default function App() {
           </Table>
         </TableContainer>
       </Paper>
-      <Modal />
+      <Modal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        editRecord={editRecord}
+        setEditRecord={setEditRecord}
+        updateRecord={updateRecord}
+      />
     </>
   );
 }
