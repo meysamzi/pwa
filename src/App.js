@@ -40,6 +40,8 @@ export default function App() {
       : setIsModalOpen(true);
   };
 
+  console.log(editRecord);
+
   return (
     <>
       <Paper sx={{ maxWidth: "1280px", margin: "40px auto" }}>
@@ -108,19 +110,59 @@ export default function App() {
         <div className="modalTextParent">
           <div className="modalTextChild">
             <label>title</label>
-            <TextField name="title" label="title" variant="outlined" />
+            <TextField
+              onChange={(e) =>
+                setEditRecord({
+                  ...editRecord,
+                  [e.target.name]: e.target.value,
+                })
+              }
+              name="title"
+              label="title"
+              variant="outlined"
+            />
           </div>
           <div className="modalTextChild">
             <label>price</label>
-            <TextField name="price" label="price" variant="outlined" />
+            <TextField
+              onChange={(e) =>
+                setEditRecord({
+                  ...editRecord,
+                  [e.target.name]: e.target.value,
+                })
+              }
+              name="price"
+              label="price"
+              variant="outlined"
+            />
           </div>
           <div className="modalTextChild">
             <label>category</label>
-            <TextField name="category" label="category" variant="outlined" />
+            <TextField
+              onChange={(e) =>
+                setEditRecord({
+                  ...editRecord,
+                  [e.target.name]: e.target.value,
+                })
+              }
+              name="category"
+              label="category"
+              variant="outlined"
+            />
           </div>
           <div className="modalTextChild">
             <label>rating</label>
-            <TextField name="rating" label="rating" variant="outlined" />
+            <TextField
+              onChange={(e) =>
+                setEditRecord({
+                  ...editRecord,
+                  [e.target.name]: e.target.value,
+                })
+              }
+              name="rating"
+              label="rating"
+              variant="outlined"
+            />
           </div>
           <Button variant="contained">Update</Button>
         </div>
