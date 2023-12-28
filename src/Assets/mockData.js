@@ -1,6 +1,8 @@
+import { Delete } from "@mui/icons-material";
+
 export const columns = [
   { id: "title", label: "title", minWidth: 170 },
-  { id: "price", label: "price", minWidth: 100 },
+  { id: "price", label: "price", minWidth: 170 },
   {
     id: "category",
     label: "category",
@@ -14,6 +16,11 @@ export const columns = [
   {
     id: "image",
     label: "image",
+    minWidth: 170,
+  },
+  {
+    id: "icon",
+    label: <Delete sx={{cursor:"pointer"}} />,
     minWidth: 170,
   },
 ];

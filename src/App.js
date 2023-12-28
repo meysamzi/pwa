@@ -30,7 +30,7 @@ export default function App() {
   }, []);
 
   return (
-    <Paper sx={{ maxWidth: "1280px", margin: "40px auto", overflow: "hidden" }}>
+    <Paper sx={{ maxWidth: "1280px", margin: "40px auto" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -38,10 +38,9 @@ export default function App() {
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  {column.label}
+                  {column.id}
                 </TableCell>
               ))}
             </TableRow>
@@ -52,18 +51,20 @@ export default function App() {
                 <TableRow hover tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
                     return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.id === "image" ? (
+                      <TableCell key={column.id}>
+                        {column.label === "image" ? (
                           <img
-                            src={row[column.id]}
+                            src={row[column.label]}
                             alt="image"
                             width={50}
                             height={50}
                           />
                         ) : typeof row[column.id] === "object" ? (
-                          row[column.id].rate
+                          row[column.label].rate
+                        ) : column.id === "icon" ? (
+                          column.label
                         ) : (
-                          row[column.id]
+                          row[column.label]
                         )}
                       </TableCell>
                     );
