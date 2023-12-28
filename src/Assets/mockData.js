@@ -1,4 +1,4 @@
-import { Delete } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 
 export const columns = [
   { id: "title", label: "title", minWidth: 170 },
@@ -20,7 +20,12 @@ export const columns = [
   },
   {
     id: "icon",
-    label: <Delete sx={{cursor:"pointer"}} />,
+    label: <Delete sx={{ cursor: "pointer" }} />,
+    minWidth: 170,
+  },
+  {
+    id: "icon",
+    label: <Edit sx={{ cursor: "pointer" }} />,
     minWidth: 170,
   },
 ];
