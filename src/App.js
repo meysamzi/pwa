@@ -18,6 +18,7 @@ export default function App() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editRecord, setEditRecord] = useState({});
+  const [recordId, setRecordId] = useState();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -35,12 +36,22 @@ export default function App() {
   }, []);
 
   const handleRecords = (id, whichIcon) => {
+    setRecordId(id);
     whichIcon === "delete"
       ? setProducts(products?.filter((record) => record?.id !== id))
       : setIsModalOpen(true);
   };
-
-  console.log(editRecord);
+  const updateRecord = () => {
+    setProducts(
+      products?.map((record) => {
+        if (record?.id === recordId) {
+          return { ...record, ...editRecord };
+        } else {
+          return record;
+        }
+      })
+    );
+  };
 
   return (
     <>
@@ -164,7 +175,9 @@ export default function App() {
               variant="outlined"
             />
           </div>
-          <Button variant="contained">Update</Button>
+          <Button onClick={() => updateRecord()} variant="contained">
+            Update
+          </Button>
         </div>
       </div>
     </>
