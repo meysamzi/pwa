@@ -1,33 +1,23 @@
 import { useEffect, useState } from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Button,
+} from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { columns } from "./Assets/mockData";
 
 export default function App() {
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editRecord, setEditRecord] = useState({});
   const [recordId, setRecordId] = useState();
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_KEY}products`)
@@ -106,15 +96,6 @@ export default function App() {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[1, 2]}
-          component="div"
-          count={10}
-          rowsPerPage={rowsPerPage}
-          page={1}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
       </Paper>
       <div style={{ display: isModalOpen ? "flex" : "none" }} className="modal">
         <Close
