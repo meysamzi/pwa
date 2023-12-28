@@ -17,6 +17,8 @@ export default function App() {
     setPage(newPage);
   };
 
+  console.log(process.env.REACT_APP_API_KEY);
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
