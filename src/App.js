@@ -117,7 +117,10 @@ export default function App() {
         />
       </Paper>
       <div style={{ display: isModalOpen ? "flex" : "none" }} className="modal">
-        <Close />
+        <Close
+          sx={{ cursor: "pointer" }}
+          onClick={() => setIsModalOpen(false)}
+        />
         <div className="modalTextParent">
           <div className="modalTextChild">
             <label>title</label>
