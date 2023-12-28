@@ -29,8 +29,10 @@ export default function App() {
       .then((data) => setProducts(data));
   }, []);
 
-  const removeRecord = (id) => {
-    setProducts(products?.filter((record) => record?.id !== id));
+  const handleRecords = (id, whichIcon) => {
+    whichIcon === "delete"
+      ? setProducts(products?.filter((record) => record?.id !== id))
+      : console.log(0);
   };
 
   return (
@@ -66,7 +68,11 @@ export default function App() {
                         ) : typeof row[column.id] === "object" ? (
                           row[column.label].rate
                         ) : column.id === "icon" ? (
-                          <span onClick={() => removeRecord(row.id)}>
+                          <span
+                            onClick={() =>
+                              handleRecords(row.id, column.whichIcon)
+                            }
+                          >
                             {column.label}
                           </span>
                         ) : (

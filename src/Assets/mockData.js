@@ -21,11 +21,13 @@ export const columns = [
   {
     id: "icon",
     label: <Delete sx={{ cursor: "pointer" }} />,
+    whichIcon:"delete",
     minWidth: 170,
   },
   {
     id: "icon",
     label: <Edit sx={{ cursor: "pointer" }} />,
+    whichIcon:"edit",
     minWidth: 170,
   },
 ];
