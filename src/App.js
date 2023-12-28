@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { columns } from "./Assets/mockData";
+import { Paper, Table, TableContainer } from "@mui/material";
 import Modal from "./Components/Products/Modal";
 import TableHeader from "./Components/Products/TableHeader";
+import CustomTableBody from "./Components/Products/CustomTableBody";
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -49,40 +41,10 @@ export default function App() {
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHeader />
-            <TableBody>
-              {products?.map((row) => {
-                return (
-                  <TableRow hover tabIndex={-1} key={row.id}>
-                    {columns.map((column) => {
-                      return (
-                        <TableCell key={column.id}>
-                          {column.label === "image" ? (
-                            <img
-                              src={row[column.label]}
-                              alt="image"
-                              width={50}
-                              height={50}
-                            />
-                          ) : typeof row[column.id] === "object" ? (
-                            row[column.label].rate
-                          ) : column.id === "icon" ? (
-                            <span
-                              onClick={() =>
-                                handleRecords(row.id, column.whichIcon)
-                              }
-                            >
-                              {column.label}
-                            </span>
-                          ) : (
-                            row[column.label]
-                          )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
+            <CustomTableBody
+              products={products}
+              handleRecords={handleRecords}
+            />
           </Table>
         </TableContainer>
       </Paper>
