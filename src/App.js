@@ -13,6 +13,7 @@ export default function App() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -32,70 +33,73 @@ export default function App() {
   const handleRecords = (id, whichIcon) => {
     whichIcon === "delete"
       ? setProducts(products?.filter((record) => record?.id !== id))
-      : console.log(0);
+      : setIsModalOpen(true);
   };
 
   return (
-    <Paper sx={{ maxWidth: "1280px", margin: "40px auto" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.id}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products?.map((row) => {
-              return (
-                <TableRow hover tabIndex={-1} key={row.id}>
-                  {columns.map((column) => {
-                    return (
-                      <TableCell key={column.id}>
-                        {column.label === "image" ? (
-                          <img
-                            src={row[column.label]}
-                            alt="image"
-                            width={50}
-                            height={50}
-                          />
-                        ) : typeof row[column.id] === "object" ? (
-                          row[column.label].rate
-                        ) : column.id === "icon" ? (
-                          <span
-                            onClick={() =>
-                              handleRecords(row.id, column.whichIcon)
-                            }
-                          >
-                            {column.label}
-                          </span>
-                        ) : (
-                          row[column.label]
-                        )}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[1, 2]}
-        component="div"
-        count={10}
-        rowsPerPage={rowsPerPage}
-        page={1}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <>
+      <Paper sx={{ maxWidth: "1280px", margin: "40px auto" }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.id}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {products?.map((row) => {
+                return (
+                  <TableRow hover tabIndex={-1} key={row.id}>
+                    {columns.map((column) => {
+                      return (
+                        <TableCell key={column.id}>
+                          {column.label === "image" ? (
+                            <img
+                              src={row[column.label]}
+                              alt="image"
+                              width={50}
+                              height={50}
+                            />
+                          ) : typeof row[column.id] === "object" ? (
+                            row[column.label].rate
+                          ) : column.id === "icon" ? (
+                            <span
+                              onClick={() =>
+                                handleRecords(row.id, column.whichIcon)
+                              }
+                            >
+                              {column.label}
+                            </span>
+                          ) : (
+                            row[column.label]
+                          )}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[1, 2]}
+          component="div"
+          count={10}
+          rowsPerPage={rowsPerPage}
+          page={1}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+      <div className="modal">modal</div>
+    </>
   );
 }
