@@ -29,6 +29,10 @@ export default function App() {
       .then((data) => setProducts(data));
   }, []);
 
+  const removeRecord = (id) => {
+    setProducts(products?.filter((record) => record?.id !== id));
+  };
+
   return (
     <Paper sx={{ maxWidth: "1280px", margin: "40px auto" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -62,7 +66,9 @@ export default function App() {
                         ) : typeof row[column.id] === "object" ? (
                           row[column.label].rate
                         ) : column.id === "icon" ? (
-                          column.label
+                          <span onClick={() => removeRecord(row.id)}>
+                            {column.label}
+                          </span>
                         ) : (
                           row[column.label]
                         )}
