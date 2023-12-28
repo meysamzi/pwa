@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { columns } from "./Assets/mockData";
 import Modal from "./Components/Products/Modal";
+import TableHeader from "./Components/Products/TableHeader";
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -47,18 +48,7 @@ export default function App() {
       <Paper sx={{ maxWidth: "1280px", margin: "40px auto" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.id}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            <TableHeader />
             <TableBody>
               {products?.map((row) => {
                 return (
