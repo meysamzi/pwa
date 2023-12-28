@@ -21,13 +21,15 @@ export const columns = [
   {
     id: "icon",
     label: <Delete sx={{ cursor: "pointer" }} />,
-    whichIcon:"delete",
+    whichIcon: "delete",
     minWidth: 170,
   },
   {
     id: "icon",
     label: <Edit sx={{ cursor: "pointer" }} />,
-    whichIcon:"edit",
+    whichIcon: "edit",
     minWidth: 170,
   },
 ];
+
+export const inputNames = ["title", "price", "category", "rating"];

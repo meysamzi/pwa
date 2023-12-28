@@ -11,7 +11,8 @@ import {
   Button,
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
-import { columns } from "./Assets/mockData";
+import { columns, inputNames } from "./Assets/mockData";
+import Modal from "./Components/Products/Modal";
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -31,6 +32,7 @@ export default function App() {
       ? setProducts(products?.filter((record) => record?.id !== id))
       : setIsModalOpen(true);
   };
+
   const updateRecord = () => {
     setProducts(
       products?.map((record) => {
@@ -97,73 +99,7 @@ export default function App() {
           </Table>
         </TableContainer>
       </Paper>
-      <div style={{ display: isModalOpen ? "flex" : "none" }} className="modal">
-        <Close
-          sx={{ cursor: "pointer" }}
-          onClick={() => setIsModalOpen(false)}
-        />
-        <div className="modalTextParent">
-          <div className="modalTextChild">
-            <label>title</label>
-            <TextField
-              onChange={(e) =>
-                setEditRecord({
-                  ...editRecord,
-                  [e.target.name]: e.target.value,
-                })
-              }
-              name="title"
-              label="title"
-              variant="outlined"
-            />
-          </div>
-          <div className="modalTextChild">
-            <label>price</label>
-            <TextField
-              onChange={(e) =>
-                setEditRecord({
-                  ...editRecord,
-                  [e.target.name]: e.target.value,
-                })
-              }
-              name="price"
-              label="price"
-              variant="outlined"
-            />
-          </div>
-          <div className="modalTextChild">
-            <label>category</label>
-            <TextField
-              onChange={(e) =>
-                setEditRecord({
-                  ...editRecord,
-                  [e.target.name]: e.target.value,
-                })
-              }
-              name="category"
-              label="category"
-              variant="outlined"
-            />
-          </div>
-          <div className="modalTextChild">
-            <label>rating</label>
-            <TextField
-              onChange={(e) =>
-                setEditRecord({
-                  ...editRecord,
-                  [e.target.name]: e.target.value,
-                })
-              }
-              name="rating"
-              label="rating"
-              variant="outlined"
-            />
-          </div>
-          <Button onClick={() => updateRecord()} variant="contained">
-            Update
-          </Button>
-        </div>
-      </div>
+      <Modal />
     </>
   );
 }
