@@ -30,7 +30,7 @@ const Modal = ({
           </div>
         ))}
         <Button onClick={() => updateRecord()} variant="contained">
-          Update
+          Edit
         </Button>
       </div>
     </div>
