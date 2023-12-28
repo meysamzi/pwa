@@ -7,6 +7,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { Close } from "@mui/icons-material";
 import { columns } from "./Assets/mockData";
 
 export default function App() {
@@ -14,6 +17,7 @@ export default function App() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editRecord, setEditRecord] = useState({});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -99,11 +103,27 @@ export default function App() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <div
-        style={{ display: isModalOpen ? "block" : "none" }}
-        className="modal"
-      >
-        modal
+      <div style={{ display: isModalOpen ? "flex" : "none" }} className="modal">
+        <Close />
+        <div className="modalTextParent">
+          <div className="modalTextChild">
+            <label>title</label>
+            <TextField name="title" label="title" variant="outlined" />
+          </div>
+          <div className="modalTextChild">
+            <label>price</label>
+            <TextField name="price" label="price" variant="outlined" />
+          </div>
+          <div className="modalTextChild">
+            <label>category</label>
+            <TextField name="category" label="category" variant="outlined" />
+          </div>
+          <div className="modalTextChild">
+            <label>rating</label>
+            <TextField name="rating" label="rating" variant="outlined" />
+          </div>
+          <Button variant="contained">Update</Button>
+        </div>
       </div>
     </>
   );
