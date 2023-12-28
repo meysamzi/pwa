@@ -1,22 +1,19 @@
 export const columns = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: "price", label: "Price", minWidth: 100 },
+  { id: "title", label: "title", minWidth: 170 },
+  { id: "price", label: "price", minWidth: 100 },
   {
-    id: "Grouping",
-    label: "Grouping",
+    id: "category",
+    label: "category",
     minWidth: 170,
-    align: "right",
   },
   {
-    id: "score",
-    label: "Score",
+    id: "rating",
+    label: "rating",
     minWidth: 170,
-    align: "right",
   },
   {
-    id: "picture",
-    label: "Picture",
+    id: "image",
+    label: "image",
     minWidth: 170,
-    align: "right",
   },
 ];

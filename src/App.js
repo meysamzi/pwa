@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import { columns } from "./Assets/mockData";
 
 export default function App() {
+  const [products, setProducts] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -25,7 +26,7 @@ export default function App() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_KEY}products`)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setProducts(data));
   }, []);
 
   return (
@@ -45,7 +46,32 @@ export default function App() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody></TableBody>
+          <TableBody>
+            {products?.map((row) => {
+              return (
+                <TableRow hover tabIndex={-1} key={row.id}>
+                  {columns.map((column) => {
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {column.id === "image" ? (
+                          <img
+                            src={row[column.id]}
+                            alt="image"
+                            width={50}
+                            height={50}
+                          />
+                        ) : typeof row[column.id] === "object" ? (
+                          row[column.id].rate
+                        ) : (
+                          row[column.id]
+                        )}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
