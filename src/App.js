@@ -99,7 +99,12 @@ export default function App() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <div className="modal">modal</div>
+      <div
+        style={{ display: isModalOpen ? "block" : "none" }}
+        className="modal"
+      >
+        modal
+      </div>
     </>
   );
 }
