@@ -2,6 +2,7 @@ const cacheName = "firstVersion";
 const cacheList = ["/", "/index.html", "static/js/bundle.js"];
 
 self.addEventListener("install", (ev) => {
+  console.log("install");
   ev.waitUntil(
     caches.open(cacheName).then((cache) => {
       return cache.addAll(cacheList).then(() => self.skipWaiting());
@@ -10,12 +11,13 @@ self.addEventListener("install", (ev) => {
 });
 
 self.addEventListener("activate", (ev) => {
+  console.log("activate");
   ev.waitUntil(self.clients.claim());
 });
 
 self.addEventListener("fetch", (e) => {
+  //   console.log("fetch ", e);
   if (navigator.onLine) {
-    console.log(0);
     let fetchRequest = e.request;
     return fetch(fetchRequest).then((response) => {
       if (!response || response.status !== 200 || response.type !== "basic") {
@@ -28,7 +30,6 @@ self.addEventListener("fetch", (e) => {
       return response;
     });
   } else {
-    console.log(1);
     e.respondWith(
       caches.match(e.request).then((response) => {
         if (response) {
