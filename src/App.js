@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Paper, Table, TableContainer } from "@mui/material";
 import Modal from "./Components/Products/Modal";
 import TableHeader from "./Components/Products/TableHeader";
@@ -37,6 +37,7 @@ export default function App() {
 
   return (
     <>
+    {console.log("dom")}
       <Paper sx={{ maxWidth: "1280px", margin: "40px auto" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">

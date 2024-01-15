@@ -1,41 +1,36 @@
-const cacheName = "firstVersion";
-const cacheList = ["/", "/index.html", "static/js/bundle.js"];
+const CACHE_NAME = "products";
+const urlsToCache = ["index.html", "offline.html"];
 
-self.addEventListener("install", (ev) => {
-  console.log("install");
-  ev.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      return cache.addAll(cacheList).then(() => self.skipWaiting());
+const self = this;
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
     })
   );
 });
 
-self.addEventListener("activate", (ev) => {
-  console.log("activate");
-  ev.waitUntil(self.clients.claim());
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then(() => {
+      return fetch(event.request).catch(() => caches.match("offline.html"));
+    })
+  );
 });
 
-self.addEventListener("fetch", (e) => {
-  //   console.log("fetch ", e);
-  if (navigator.onLine) {
-    let fetchRequest = e.request;
-    return fetch(fetchRequest).then((response) => {
-      if (!response || response.status !== 200 || response.type !== "basic") {
-        return response;
-      }
-      let responseToCache = response.clone();
-      caches.open(cacheName).then((cache) => {
-        cache.put(e.request, responseToCache);
-      });
-      return response;
-    });
-  } else {
-    e.respondWith(
-      caches.match(e.request).then((response) => {
-        if (response) {
-          return response;
-        }
-      })
-    );
-  }
+self.addEventListener("activate", (event) => {
+  const cacheWhitelist = [];
+  cacheWhitelist.push(CACHE_NAME);
+  event.waitUntil(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames.map((cacheName) => {
+          if (!cacheWhitelist.includes(cacheName)) {
+            return caches.delete(cacheName);
+          }
+        })
+      )
+    )
+  );
 });
